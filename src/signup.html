@@ -3,21 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pets | New user</title>
+    <title>Pets | New User</title>
     <link rel="icon" type="image/png" href="../src/icons/logo.png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        table {
+            margin: 20px auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        .file-input-container {
+            position: relative;
+            width: 100%;
+        }
+        .file-input-container input[type="file"] {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        .file-input-label {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        button {
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <center>
-        <img src = "images/register.png" width="100">
-    </center>
-    <form name="signup-form" action="backend/signup.php" method="post">
-        <table border="0" align="center">
-            <tr><td><input type="text" name="fname" placeholder="Fullname" required></td></tr>
-            <tr><td><input type="email" name="email" placeholder="joe@mail.com" required></td></tr>
-            <tr><td><input type="password" name="passwd" placeholder="*********" required></td></tr>
-            <tr><td align="center"><button>Register</button></td></tr>
-            <tr><td align="center"><a href = "../src/signin.php">Go to login</a></td></tr>    
-        </table>
-    </form>   
+    <div class="container">
+        <img src="images/register.png" width="100" alt="Register">
+        <form name="signup-form" action="backend/signup.php" method="post" enctype="multipart/form-data">
+            <table border="0">
+                <tr>
+                    <td><input type="text" name="fname" placeholder="Fullname" required></td>
+                </tr>
+                <tr>
+                    <td><input type="email" name="email" placeholder="joe@mail.com" required></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="passwd" placeholder="*********" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="file-input-container">
+                            <label for="user_photo" class="file-input-label">Añadir foto</label>
+                            <input type="file" name="user_photo" id="user_photo">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"><button type="submit">Register</button></td>
+                </tr>
+                <tr>
+                    <td align="center"><a href="../src/signin.php">Go to login</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        document.getElementById('user_photo').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            var nextSibling = this.nextElementSibling;
+            nextSibling.innerText = fileName;
+        });
+    </script>
 </body>
 </html>
